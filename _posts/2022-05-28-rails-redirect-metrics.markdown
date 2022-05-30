@@ -50,27 +50,15 @@ Another option is passing a block into `redirect`:
 
 ```rb
 get "/old-home" => redirect {|_, request|
-  $stats.count("redirects", tags: {path: request.path})
+  some_stats_collector(request.path)
   "/home"
 }
 ```
 
-This works because the block isn't evaluated until runtime, which is when we need to capture stats.
-But it's tiresome and cumbersome when you have a _lot_ of redirects to track.
+That has the unfortunate side effect of adding a log of clutter to the routes file. 
 
-Instead, we add this bit of magic to the top of our `config/routes.rb`:
-
-```rb
-def redirect(*args, &block)
-  super(*args, {|_, request|
-    $stats.count("redirects", tags: {path: request.path})
-    yield
-  })
-end
-```
-
-On a related note, if you have more complex logic to run at redirect, there's something nice tucked away in the 
-[Rails redirection logic](https://github.com/rails/rails/blob/01f58d62c2f31f42d0184e0add2b6aa710513695/actionpack/lib/action_dispatch/routing/redirection.rb#L184):
+Fortunately, there's something nice tucked away in the 
+[Rails redirection logic](https://github.com/rails/rails/blob/01f58d62c2f31f42d0184e0add2b6aa710513695/actionpack/lib/action_dispatch/routing/redirection.rb#L184) which lets us do essentially the same thing, but through a class method:
 
 ```
 # Finally, an object which responds to call can be supplied to redirect, allowing you to reuse
@@ -91,7 +79,7 @@ class RedirectService
   end
 
   def call(params, request)
-    # some bit of complex logic
+    some_stats_collector(request.path)
     @path
   end
 end
@@ -100,4 +88,6 @@ end
 get "/old-home" => redirect(RedirectService.new("/home"))
 ```
 
-At that point, though, you might consider just making another controller.
+At that point, it's a trade-off on whether you want to add a dedicated redirect controller. This approach lets us
+keep lower processing overhead on simple redirects - which is why we chose it - but it also feels like it clutters up `config/routes.rb`. 
+A redirects controller would keep `config/routes.rb` cleaner, but with some added overhead. 
