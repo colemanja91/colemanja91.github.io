@@ -89,5 +89,5 @@ get "/old-home" => redirect(RedirectService.new("/home"))
 ```
 
 At that point, it's a trade-off on whether you want to add a dedicated redirect controller. This approach lets us
-keep lower processing overhead on simple redirects - which is why we chose it - but it also feels like it clutters up `config/routes.rb`. 
+keep lower processing overhead on simple redirects - which is why we chose it - but still feels like it clutters up `config/routes.rb` (although not as much as an explicit block for each redirect). 
 A redirects controller would keep `config/routes.rb` cleaner, but with some added overhead. 
