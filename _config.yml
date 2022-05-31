@@ -30,6 +30,12 @@ masthead_title           : # overrides the website title displayed in the masthe
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 200
 
+analytics:
+  provider               : "google"
+  google:
+    tracking_id          : "G-6YVH28T9QN"
+    anonymize_ip         : true
+
 # Site Author
 author:
   name             : "Jeremiah Coleman"
