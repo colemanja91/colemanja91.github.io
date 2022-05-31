@@ -17,6 +17,7 @@ This is my cat. His name is Frank. You'll probably see him on a Zoom call.
 ## Personal
 
 My name is Jeremiah, but you might hear others call me Jeremy, JCole, or Allie. 
+My pronouns are he/him, but my amatuer nouns are she/her. Don't worry about it too much - I don't.
 
 ## Professional
 
