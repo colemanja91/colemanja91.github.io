@@ -88,3 +88,8 @@ Think of it like a non-automated, sometimes-unintentional form of Chaos Monkey.
 
 
 ## References
+
+* https://copyconstruct.medium.com/testing-in-production-the-safe-way-18ca102d0ef1
+* https://www.testim.io/blog/testing-in-production-modern-qa-strategy/
+* https://www.browserstack.com/guide/testing-in-production
+* https://www.loadmill.com/blog/what-you-need-to-know-about-testing-in-production
