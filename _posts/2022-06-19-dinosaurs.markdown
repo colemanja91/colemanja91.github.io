@@ -1,7 +1,7 @@
 ---
 layout: posts
 title:  "Dinosaurs and Observability"
-date:   2022-06-19 12:00:00 -0400
+date:   2022-06-20 08:20:00 -0400
 categories: observability
 ---
 _Jurassic World Dominion_ just came in movie theaters. It is absolutely terrible, and I love it. 
