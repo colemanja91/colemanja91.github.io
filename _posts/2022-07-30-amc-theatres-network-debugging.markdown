@@ -1,6 +1,6 @@
 ---
 layout: posts
-title:  "Debugging Network Issues with AMC Theaters"
+title:  "Debugging Network Issues with AMC Theatres"
 date:   2022-07-30 11:00:00 -0400
 categories: storytime
 ---
@@ -12,11 +12,11 @@ I've been on vacation this week, which means two things:
 
 Yesterday, these two just happened to overlap! 
 
-I bought a ticket to see _DC League of Super Pets_ at the local AMC. I'm a pretty frequent customer there, given that it's only a couple of minutes away from home, and I always use the AMC Theaters app.
+I bought a ticket to see _DC League of Super Pets_ at the local AMC. I'm a pretty frequent customer there, given that it's only a couple of minutes away from home, and I always use the AMC theatres app.
 
-In this case, when I got to the theater, I opened the app while sitting in my car so I could pull up my ticket, but got the error below:
+In this case, when I got to the theatre, I opened the app while sitting in my car so I could pull up my ticket, but got the error below:
 
-![Screenshot of the AMC Theaters app displaying the text "Error connecting to AMC Theaters. Please check your internet connection and retry."](../../../assets/images/amc_app_no_connection.png)
+![Screenshot of the AMC theatres app displaying the text "Error connecting to AMC theatres. Please check your internet connection and retry."](../../../assets/images/amc_app_no_connection.png)
 
 OK, I did the normal troubleshooting steps:
 * Made sure I had an internet connection (could access other apps with no problem)
@@ -27,7 +27,7 @@ OK, I did the normal troubleshooting steps:
 
 Most telling, though, was that even attempting to sign in to AMC thru their website (on Android Chrome) wasn't working - there was no error displayed, it would simply show the loading animation then stay on the sign-in screen. 
 
-Nothing worked, so I was thinking it was just a server issue with AMC. Then I remembered that they also email a receipt with the QR code and confirmation number; the confirmation number was enough to get me in, but strangely the QR code wasn't loading in the email itself. Also strange was the fact that, once I got in the theater, no one else seemed to be having any issues. When I got home, it seemed whatever the issue was had been resolved as the app could open just fine.
+Nothing worked, so I was thinking it was just a server issue with AMC. Then I remembered that they also email a receipt with the QR code and confirmation number; the confirmation number was enough to get me in, but strangely the QR code wasn't loading in the email itself. Also strange was the fact that, once I got in the theatre, no one else seemed to be having any issues. When I got home, it seemed whatever the issue was had been resolved as the app could open just fine.
 
 This morning, I was looking in to getting tickets for _Nope_ while at the local [coffee shop](https://fountcoffee.com/), and again the app was working fine, but on the way home I stopped off for a donut, and curiously, when I checked the app again, I got the same network connection issue. Hmmm. 
 
