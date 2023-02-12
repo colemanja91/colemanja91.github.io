@@ -19,7 +19,7 @@ locale                   : "en-US"
 title                    : "colemanja91"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
-name                     : "Jeremiah (Allie) Coleman"
+name                     : "Allie (Jeremiah) Coleman"
 description              : "An amazing website."
 url                      : "https://colemanja91.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
@@ -32,7 +32,7 @@ words_per_minute         : 200
 
 # Site Author
 author:
-  name             : "Jeremiah Coleman"
+  name             : "Allie Coleman"
   avatar           : "/assets/images/profile.jpg"
   bio              : I solve problems, and try not to create new ones in the process
   location         : "Cary, NC"
@@ -46,7 +46,7 @@ author:
       url: "https://github.com/colemanja91"
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
-      url: "https://www.linkedin.com/in/jeremiah-coleman-product/"
+      url: " www.linkedin.com/in/allie-coleman-eng/"
 
 # Site Footer
 footer:
@@ -59,7 +59,7 @@ footer:
       url: "https://github.com/colemanja91"
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
-      url: "https://www.linkedin.com/in/jeremiah-coleman-product/"
+      url: " www.linkedin.com/in/allie-coleman-eng/"
 
 
 # Reading Files
