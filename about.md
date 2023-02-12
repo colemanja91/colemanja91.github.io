@@ -4,7 +4,7 @@ title: About Me
 permalink: /about/
 ---
 
-![The most adorable an annoying programmer you'll ever see](/assets/images/profile.jpg){: .align-center width="250" style="border-radius:50%"}
+![The most adorable and annoying programmer you'll ever see](/assets/images/profile.jpg){: .align-center width="250" style="border-radius:50%"}
 
 You've found my blog thing!
 
@@ -12,12 +12,11 @@ You've found my blog thing!
 
 This is my cat. His name is Frank. You'll probably see him on a Zoom call.
 
-![The most adorable an annoying programmer you'll ever see](/assets/images/frank.jpg){: .align-center width="275"}
+![The most adorable and annoying programmer you'll ever see](/assets/images/frank.jpg){: .align-center width="275"}
 
 ## Personal
 
-My name is Jeremiah, but you might hear others call me Jeremy, JCole, or Allie. 
-My pronouns are he/him, but my amatuer nouns are she/her. Don't worry about it too much - I don't.
+My name is Allie, but you might hear others call me Jeremy, JCole, or Jeremiah. 
 
 ## Professional
 
