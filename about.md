@@ -16,7 +16,9 @@ This is my cat. His name is Frank. You'll probably see him on a Zoom call.
 
 ## Personal
 
-My name is Allie, but you might hear others call me Jeremy, JCole, or Jeremiah. 
+My name is Allie, but you might hear others call me Jeremy, JCole, or Jeremiah (I won't be offended if you use one of these).
+
+[My non-professional blog](https://alliec.substack.com/), where I write about theology and faith.
 
 ## Professional
 
