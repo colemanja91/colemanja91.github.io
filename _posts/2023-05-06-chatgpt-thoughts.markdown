@@ -4,6 +4,7 @@ title:  "ChatGPT"
 date:   2023-05-06 12:30:00 -0400
 categories: random
 ---
+
 ChatGPT, created by OpenAI, is an amazing tool that's helpful in refining rote tasks, and will eventually become as commonplace as spellcheck tools. However, I believe that its success wave won't continue exponentially, and here are the reasons why:
 
 ## 0. OpenAI will dilute over time
