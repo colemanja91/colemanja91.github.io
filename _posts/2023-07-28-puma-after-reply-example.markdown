@@ -1,7 +1,7 @@
 ---
 layout: posts
 title:  "Example: Using after_reply with Puma"
-date:   2023-06-30 20:30:00 -0400
+date:   2023-07-28 08:30:00 -0400
 categories: rails
 ---
 
@@ -145,7 +145,7 @@ class MyController < ApplicationController
 end
 ```
 
-Note that the value for `rack.after_reply` must be an array - to be safe, you should instantiate and add, in case you end up using `after_reply` in multiple places:
+Note that the value for `rack.after_reply` must be an array - to be safe, you should instantiate and add, in case you end up using `after_reply` in multiple places (this avoids accidentally overwriting any other usage of `after_reply`):
 
 ```rb
 class MyController < ApplicationController
