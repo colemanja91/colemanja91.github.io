@@ -1,7 +1,7 @@
 ---
 layout: posts
 title:  "Example: Using after_reply with Puma"
-date:   2023-07-28 08:30:00 -0400
+date:   2023-07-29 08:00:00 -0400
 categories: rails
 ---
 
@@ -93,7 +93,7 @@ get '/' do
   puts "log message"
   env["rack.after_reply"] = [Processor.new]
 
-  "Hello wor"
+  "Hello Earthlings"
 end
 ```
 
@@ -165,6 +165,62 @@ For example, we use a handful of [ActiveSupport::CurrentAttributes](https://api.
 
 To get around this, our `Processor` extracts the information it needs when we instantiate (`request.env["rack.after_reply"] << Processor.new`), but the heavy lifting still happens after the request is returned.
 
-## Wrapping up
+## Testing
+
+How did we ensure that our `after_reply` logic was tested?
+
+First, we ensured that our `Processor` class was fully testable independent of any request framework or middleware implementation. It sounds obvious, but to this point our observability gem had grown organically, and specs testing underlying logic were intertwined with specs for the middleware implementation. Refactoring the gem and the specs put us in a place where we could test the two separately. 
+
+When `Processor` is used directly within the middleware, testing on middleware is easy as we can `instance_double` or `spy` the `Processor` and expect to have received `:call`. Moving to after reply means `call` will no longer be called in a context where we can directly observe, instead taking on faith that Puma is invoking `call`.
+
+What we _can_ do is ensure that the middleware successfully adds `Processor.new` to the `env["rack.after_reply"]` array. This currently requires a bit of monkey-patching, as none of the current Rack mocks (used in middleware specs) allow access to `env` _after_ the request completes.
+
+Here's how we monkey-patched it:
+
+```rb
+module Rack
+  class MockRequest
+    def request(method = GET, uri = "", opts = {})
+      env = self.class.env_for(uri, opts.merge(method: method))
+
+      if opts[:lint]
+        app = Rack::Lint.new(@app)
+      else
+        app = @app
+      end
+
+      errors = env[RACK_ERRORS]
+      status, headers, body = app.call(env)
+
+      # Here's where we monkey-patch - MockRequest typically returns a MockResponse
+      # In this case, we don't need a full Response object, we just need to be able
+      # to inspect `env`
+      # MockResponse.new(status, headers, body, errors)
+
+      # Instead we return an array that includes `env`
+      [status, headers, body, errors, env]
+    ensure
+      body.close if body.respond_to?(:close)
+    end
+  end
+end
+```
+
+Then we setup our middleware test using Rack, invoke a request, then inspect `env` to make sure
+it includes the expected `Processor` instances.
+
+## Caveats
+
+A few things to think about when deciding if `after_reply` is right for your use case:
+
+1. Completion is _not_ required for a successful response to be returned: the response will be returned regardless of whether or not your `after_reply` logic completes successfully 
+2. Your application can handle a moment of latency in a thread _before picking up the next request_: the Puma worker will still need time to complete `after_reply`, the apps in our case are sufficiently scaled so introducing `after_reply` had little effect on our utilization, but if you're working on a tighter scaling budget it's good to keep an eye on those metrics
+3. Explore whether or not an async job (like Sidekiq) is a better fit; in our case of gathering observability metrics, tag collection required the most time, and enqueuing a job would have required running tag collection _before_ enqueueing, thus negating all the performance benefits. If you need to guarantee that the logic executes (or can be retried), and can ensure that the actual time-intensive tasks can be deferred, then async jobs are the better choice. 
+
+## Wrapping up and results
 
 `after_reply` is a great way to improve a bit on performance _if_ the time-intensive parts of your code can happen after a request completes. 
+
+I mentioned using `rack.after_reply` in our observability tooling. It was satisfactorily performant operating as middleware, until we made one change which would increase the volume of metrics collected. There was no noticeable impact in many of our services. But in one of our core services it resulted in a 20 millisecond latency increase across p90 and p95. It also noticeably propagated upstream to one of it's heaviest callers (a consumer-facing app). 
+
+After moving to `after_reply`, we were able to reintroduce our initial change with no increase in latency. In fact, moving to `after_reply` bought us a 2-3 millisecond improvement on our p90 and p95 latencies!
